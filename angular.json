@@ -3,5 +3,41 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "intervalQueueLogger": {
+      "projectType": "library",
+      "root": "projects/interval-queue-logger",
+      "sourceRoot": "projects/interval-queue-logger/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/interval-queue-logger/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/interval-queue-logger/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/interval-queue-logger/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/interval-queue-logger/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
   }
 }
