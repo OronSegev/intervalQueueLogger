@@ -3,5 +3,4 @@
  */
 
 export * from './lib/interval-queue-logger.service';
-export * from './lib/interval-queue-logger.component';
-export * from './lib/interval-queue-logger.module';
+export { IntervalQueueLoggerModule } from './lib/interval-queue-logger.module';
