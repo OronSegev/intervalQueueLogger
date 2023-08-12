@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { IntervalQueueLoggerService } from 'intervalQueueLogger';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, inject } from '@angular/core';
+import { LOGGER_SERVICE } from 'intervalQueueLogger';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +13,16 @@ import { IntervalQueueLoggerService } from 'intervalQueueLogger';
 })
 export class AppComponent implements OnInit {
   title = 'testApp';
+  private http = inject(HttpClient);
 
-  constructor(private logger: IntervalQueueLoggerService) {
+  constructor() {}
 
-  }
   ngOnInit(): void {
-    this.logger.log('testet', 'test');
+
+    this.http.get('https://jsonplaceholder.typicode.com/todos/dsf').pipe(take(1)).subscribe(todo => console.log(todo));
+
+
+    throw new Error('my error message');
   }
 
 }

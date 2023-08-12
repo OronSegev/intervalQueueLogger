@@ -1,23 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject, interval } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QueueService<T> {
-  private queue: T[] = [];
   private queueSubject = new Subject<T>();
 
-  enqueue(item: T) {
-    this.queue.push(item);
+  public push(item: T) {
     this.queueSubject.next(item);
   }
 
-  dequeue(): T | undefined {
-    return this.queue.shift();
-  }
-
-  observeQueue(): Observable<T> {
+  public getQueueObservable() {
     return this.queueSubject.asObservable();
   }
 }

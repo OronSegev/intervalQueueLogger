@@ -3,17 +3,18 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IntervalQueueLoggerModule } from '../../interval-queue-logger/src/public-api';
-
-
+import { CommonModule } from '@angular/common';
+import { IntervalQueueLoggerModule } from 'intervalQueueLogger';
 
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
       HttpClientModule,
       BrowserAnimationsModule,
-      IntervalQueueLoggerModule.forRoot({isProduction: true})
-    )
-  ]
-})
-  .catch(err => console.error(err));
+      CommonModule,
+      IntervalQueueLoggerModule.forRoot({
+        isProduction: true,
+      })
+    ),
+  ],
+});
