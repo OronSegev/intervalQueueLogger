@@ -1,24 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { IflusherService } from '../../models/flusher.interface';
-import {
-  Observable,
-  Subject,
-  Subscription,
-  bufferTime,
-  filter,
-  interval,
-  of,
-  takeUntil,
-  withLatestFrom,
-} from 'rxjs';
+import { Observable, Subscription, bufferTime, filter } from 'rxjs';
 import { LOGGER_TARGET_TOKEN } from '../../tokens/target.token';
-import { QueueService } from '../queue/queue.service';
-import { Log } from '../../models/log.class';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FlusherService implements IflusherService {
+export class FlusherService {
   private subscription!: Subscription;
   private target = inject(LOGGER_TARGET_TOKEN);
   public flushQueuePeriodaclly<T>(interval: number, queue$: Observable<T>) {
@@ -28,8 +15,6 @@ export class FlusherService implements IflusherService {
         filter((items: T[]) => items.length > 0) // Filters out empty arrays
       )
       .subscribe((items: T[]) => {
-        console.log('Items in the queue:', items);
-        // TODO : use target to write
         this.target.write<T>(items);
       });
   }
