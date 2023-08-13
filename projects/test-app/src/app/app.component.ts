@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.http.get('https://jsonplaceholder.typicode.com/todos/dsf').pipe(take(1)).subscribe(todo => console.log(todo));
+    this.http.get('https://jsonplaceholder.typicode.com/todos/dsf').pipe(take(1)).subscribe();
 
 
     throw new Error('my error message');
