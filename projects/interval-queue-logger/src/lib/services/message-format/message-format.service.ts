@@ -4,19 +4,49 @@ import { IMessageFormatService } from '../../models/logger-message-format.interf
 
 @Injectable()
 export class MessageFormatService implements IMessageFormatService {
-
-  protected computeMessageFomat(config: LoggerConfig, timestamp: string, message: string, stackTrace: string): string {
-    let messageFormat = '[{timestamp}] - {message}, {stackTrace}';
+  protected computeMessageFomat(
+    config: LoggerConfig,
+    timestamp: string,
+    messageErr: string,
+    additional: any[] = []
+  ): string {
+    let messageFormat = '[{timestamp}] - {messageErr}';
 
     if (config.messageFormat) {
       messageFormat = config.messageFormat;
     }
 
-    return messageFormat.replace('{timestamp}', timestamp).replace('{message}', message).replace('{stackTrace}', stackTrace);
+    let message = messageFormat
+      .replace('{timestamp}', timestamp)
+      .replace('{messageErr}', messageErr);
+
+    message +=
+      ' ' +
+      additional.map((item, idx) => {
+        try {
+          if (item instanceof Error) {
+            return item?.stack;
+          }
+
+          if (typeof item === 'object') {
+            return JSON.stringify(item);
+          }
+
+          return item;
+        } catch (e) {
+          return `The additional[${idx}] value could not be parsed using JSON.stringify().`;
+        }
+      });
+
+    return message;
   }
 
-  public getMessageFormat(config: LoggerConfig, timestamp: string, message: string, stackTrace: string): string {
-    return this.computeMessageFomat(config, timestamp, message, stackTrace);
+  public getMessageFormat(
+    config: LoggerConfig,
+    timestamp: string,
+    message: string,
+    additional: any[] = []
+  ): string {
+    return this.computeMessageFomat(config, timestamp, message, additional);
   }
-
 }

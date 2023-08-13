@@ -1,6 +1,6 @@
 import { Injector } from "@angular/core";
 import { ConsoleTargetService } from "../services/targets/console-target/console-target.service";
-import { LocalStorageTargetService } from "../services/targets/local-storage-target/local-storagetarget.service";
+import { LocalStorageTargetService } from "../services/targets/local-storage-target/local-storage-target.service";
 import { TOKEN_LOGGER_CONFIG } from "../tokens/config.token";
 import { ITarget } from "../models/target.interface";
 

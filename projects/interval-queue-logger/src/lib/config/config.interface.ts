@@ -8,4 +8,5 @@ export interface LoggerConfig {
     interval: number;
   };
   target?: ILoggerTarget;
+  localStorageKey?: string;
 }

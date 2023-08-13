@@ -12,9 +12,14 @@ export class DirectLoggerService implements ILoggerService {
   private messageFormatService = inject(TOKEN_LOGGER_MESSAGEFORMAT_SERVICE);
   private target = inject(LOGGER_TARGET_TOKEN);
 
-  public error(errorMsg: string, stackTrace: string) {
+  public error(errorMsg: string, additional: any[] = []) {
     const timeStamp = this.timeStampService.getTimeStamp(this.config);
-    const message = this.messageFormatService.getMessageFormat(this.config, timeStamp, errorMsg, stackTrace);
-    this.target.write<string>([message])
+    const message = this.messageFormatService.getMessageFormat(
+      this.config,
+      timeStamp,
+      errorMsg,
+      additional
+    );
+    this.target.write<string>([message]);
   }
 }

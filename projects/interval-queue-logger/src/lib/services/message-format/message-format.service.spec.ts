@@ -23,7 +23,7 @@ describe('MessageFormatService', () => {
     const message = 'Test message';
     const stackTrace = 'Test stack trace';
 
-    const result = service.getMessageFormat(config, timestamp, message, stackTrace);
+    const result = service.getMessageFormat(config, timestamp, message, [stackTrace]);
 
     expect(result).toBe('[2023-08-13] - Test message, Test stack trace');
   });
@@ -36,7 +36,7 @@ describe('MessageFormatService', () => {
     const timestamp = '2023-08-13';
     const message = 'Test message';
 
-    const result = service.getMessageFormat(config, timestamp, message, '');
+    const result = service.getMessageFormat(config, timestamp, message);
 
     expect(result).toBe('[2023-08-13] - Test message');
   });
@@ -49,7 +49,7 @@ describe('MessageFormatService', () => {
     const message = 'Test message';
     const stackTrace = 'Test stack trace';
 
-    const result = service.getMessageFormat(config, '', message, stackTrace);
+    const result = service.getMessageFormat(config, '', message, [stackTrace]);
 
     expect(result).toBe('Test message - Test stack trace');
   });

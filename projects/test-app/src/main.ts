@@ -12,26 +12,28 @@ bootstrapApplication(AppComponent, {
       HttpClientModule,
       BrowserAnimationsModule,
       CommonModule,
-      // using defualt config - console log as defualt target , and direct logger - no queue
       IntervalQueueLoggerModule.forRoot({
         isProduction: true,
+        queue: {
+          interval: 3000
+        },
+        target: 'localStorage',
+        localStorageKey: 'myKey'
       })
     ),
   ],
 });
 
-// different configuration - using interval queue and setting interval for 5 sec
+// different configuration - using direct logger (no queue)
 // and using local Storage as target
 
 // IntervalQueueLoggerModule.forRoot({
 //   isProduction: true,
-//   queue: {
-//     interval: 5000 // time in milisecound
-//   },
 //   target: 'localStorage'
 // })
 
-// example for different message format
+// example for different message format and using queue logger with 5 sec interval
+// the queue is independed of the the target
 
 // IntervalQueueLoggerModule.forRoot({
 //   isProduction: true,
@@ -39,5 +41,5 @@ bootstrapApplication(AppComponent, {
 //     interval: 5000 // time in milisecound
 //   },
 //   target: 'localStorage',
-//   messageFormat: '[{message} - {timeStamp}, {stackTrace}]'
+//   messageFormat: '[{message} - {timeStamp}]'
 // })

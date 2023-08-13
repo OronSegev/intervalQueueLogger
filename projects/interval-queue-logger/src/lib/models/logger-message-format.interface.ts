@@ -5,5 +5,5 @@ export interface IMessageFormatService {
    * Gets message format
    * @param config
    */
-    getMessageFormat(config: LoggerConfig, timestamp: string, message: string, stackTrace: string): string;
+    getMessageFormat(config: LoggerConfig, timestamp: string, message: string, additional?: any[]): string;
   }

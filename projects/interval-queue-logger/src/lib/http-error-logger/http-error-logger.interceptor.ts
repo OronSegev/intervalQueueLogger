@@ -25,12 +25,10 @@ export class HttpErrorLoggerInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (this.config.isProduction) {
-          if (error.error instanceof ErrorEvent) {
-            // do nothing
-          } else {
-            this._logger.error(error.message, error.statusText);
-          }
+        if (error.error instanceof ErrorEvent) {
+          // do nothing
+        } else {
+          this._logger.error(error.message, [error.statusText]);
         }
 
         return throwError(() => new HttpErrorResponse({ error }));
