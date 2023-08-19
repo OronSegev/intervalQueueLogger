@@ -14,10 +14,7 @@ bootstrapApplication(AppComponent, {
       CommonModule,
       IntervalQueueLoggerModule.forRoot({
         isProduction: true,
-        queue: {
-          interval: 3000
-        },
-        target: 'localStorage',
+        target: 'console',
         localStorageKey: 'myKey'
       })
     ),
